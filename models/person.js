@@ -29,7 +29,8 @@ const personSchema = new Schema({
     dob: {
         type: Date,
     },
-    children: [ {type: mongoose.Types.ObjectId, ref: "Person"}]
+    //children: [ {type: mongoose.Types.ObjectId, ref: "Person"}]
+    children: [{ type: String}]
 })
 
 const Person = model("Person", personSchema);
