@@ -8,6 +8,8 @@ const personSchema = new Schema({
     },
     email: {
         type: String,
+        unique: true,
+        email: true,
         trim: true,
     },
     description: {
@@ -25,7 +27,7 @@ const personSchema = new Schema({
         default: false,
     },
     dob: {
-        type: String,
+        type: Date,
     },
     children: [ {type: mongoose.Types.ObjectId, ref: "Person"}]
 })

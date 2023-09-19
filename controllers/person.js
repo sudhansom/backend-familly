@@ -21,3 +21,13 @@ export const createPerson = async (req, res, next) => {
         return next(err);
     }
 }
+
+export const getAllPerson = async (req, res, next) => {
+    try {
+        const allPeople = await Person.find();
+        return res.status(200).json(allPeople);
+    }
+    catch(error){
+        return next(error);
+    }
+}

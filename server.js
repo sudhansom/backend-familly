@@ -5,6 +5,7 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 import { dev } from "./config/index.js";
 import personRouter from "./routes/person.js";
+import userRoute from "./routes/user.js";
 
 
 const app = express();
@@ -17,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use("/api/persons", personRouter);
-
+app.use("/api/user", userRoute);
 
 
 app.use(( req, res, next) => {
