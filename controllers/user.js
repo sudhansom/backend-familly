@@ -1,5 +1,8 @@
 import User from "../models/user.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import HttpError from "../http-error/error.js";
+import { dev } from "../config/index.js";
 
 export const createUser = async (req, res, next) => {
     try {
@@ -19,13 +22,15 @@ export const loginUser = async (req, res, next) => {
     try {
         const { userName, password } = req.body;
         const user = await User.findOne({name: userName});
-        console.log(password, user.password);
         if(!user){
             return res.status(404).json({message: "User not found."});
         }
         const isPasswordMatched = await bcrypt.compare(password, user.password);
-        console.log(isPasswordMatched);
-        return res.status(200).json({success: true, statusCode: 200});
+        if(!isPasswordMatched){
+            return next(new HttpError("password not matched", 404));
+        }
+       const token = jwt.sign({user}, 'dev.app.jwtSecretKey', {expiresIn: '1h'} );
+        return res.status(200).json({success: true, statusCode: 200, token});
     }catch(error){
         return next(error);
     }
