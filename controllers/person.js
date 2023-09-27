@@ -49,7 +49,7 @@ export const updatePerson = async ( req, res, next ) => {
         const id = req.params.id;
         const person = await Person.findByIdAndUpdate(id, req.body);
         await person.save();
-        return res.status(200).json(person);
+        return res.status(200).json({...person, token: req.body.token});
     }
     catch(error){
         return next(error);
