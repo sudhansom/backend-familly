@@ -51,8 +51,8 @@ export const updatePerson = async ( req, res, next ) => {
         const id = req.params.id;
         const person = await Person.findByIdAndUpdate(id, req.body);
         await person.save();
-        //const tokenVerified = jwt.verify(req.body.token, 'dev.app.jwtSecretKey');
-        return res.status(200).json({...person, token: req.body.token});
+        const tokenVerified = jwt.verify(req.body.token, dev.app.jwtSecretKey);
+        return res.status(200).json({message: "Person modified"});
     }
     catch(error){
         return next(error);

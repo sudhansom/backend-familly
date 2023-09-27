@@ -29,7 +29,7 @@ export const loginUser = async (req, res, next) => {
         if(!isPasswordMatched){
             return next(new HttpError("password not matched", 404));
         }
-       const token = jwt.sign({user}, 'dev.app.jwtSecretKey', {expiresIn: '1h'} );
+       const token = jwt.sign({user}, dev.app.jwtSecretKey, {expiresIn: '1h'} );
         return res.status(200).json({success: true, statusCode: 200, token});
     }catch(error){
         return next(error);
