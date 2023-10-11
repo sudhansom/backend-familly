@@ -13,7 +13,7 @@ const personRouter = Router();
 personRouter.post("/", createPerson);
 personRouter.get("/", getAllPerson);
 personRouter.get("/:id", getOnePerson);
-personRouter.put("/:id", authenticateUser, updatePerson);
+personRouter.put("/:id", updatePerson);
 personRouter.delete("/:id", deletePerson);
 
 export default personRouter;
